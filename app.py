@@ -7,12 +7,11 @@ from database import create_database, save_analysis
 from ai_engine import explain_alert
 
 app = Flask(__name__)
+UPLOAD_FOLDER = "logs"
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)  
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 create_database()
 latest_result = None
-
-UPLOAD_FOLDER = "logs"
-app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-
 
 @app.route("/")
 def home():

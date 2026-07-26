@@ -1,203 +1,196 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini SIEM Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 30px;
+        }
+        h1 {
+            color: #38bdf8;
+            font-size: 2rem;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .subtitle {
+            text-align: left;
+            color: #94a3b8;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #334155;
+            margin: 20px 0;
+        }
+        h2 {
+            color: #f1f5f9;
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+        }
+        .card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+        form {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        input[type="file"] {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            border: 1px solid #475569;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button {
+            background-color: #0284c7;
+            color: #ffffff;
+            border: none;
+            padding: 9px 20px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        button:hover {
+            background-color: #0369a1;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat-box {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+        }
+        .stat-box .number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #38bdf8;
+            margin-top: 5px;
+        }
+        .stat-box.high .number { color: #f87171; }
+        .stat-box.medium .number { color: #fbbf24; }
+        .stat-box.low .number { color: #4ade80; }
 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background-color: #0f172a;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #334155;
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+        th {
+            background-color: #1e293b;
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+        tr:nth-child(even) {
+            background-color: #131d31;
+        }
+    </style>
+</head>
 <body>
 
     <h1>🛡️ MINI SIEM DASHBOARD</h1>
-    <p style="text-align:center;color:gray;">
-    Simple Log Monitoring & Threat Detection System
-    </p>
+    <p class="subtitle">Simple Log Monitoring & Threat Detection System</p>
 
-    <hr>
-
-    <h2>Upload Log File</h2>
-
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-
-    <input type="file" name="logfile" required>
-
-    <button type="submit">Upload</button>
-
-    </form>
-
-    {% if filename %}
-    <p style="color:green;">
-    <b>Selected File:</b> {{ filename }} ✅
-    </p>
-    {% endif %}
-
-    <hr>
-
-    <h2>Security Summary</h2>
-
-    <div class="summary">
-
-    <p><b>Total Logs:</b> {{ total_logs }}</p>
-
-    <p><b>Alerts:</b> {{ alerts }}</p>
-
-    <p><b>High Severity:</b>
-    <span class="high">{{ high }}</span></p>
-
-    <p><b>Medium Severity:</b>
-    <span class="medium">{{ medium }}</span></p>
-
-    <p><b>Low Severity:</b>
-    <span class="low">{{ low }}</span></p>
-
+    <div class="card">
+        <h2>Upload Log File</h2>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="logfile" required>
+            <button type="submit">Upload & Analyze</button>
+        </form>
     </div>
 
-    <hr>
-
-    <h2>Detected Threats</h2>
-
-    <table border="1" cellpadding="8">
-
-    <tr>
-        <th>Event</th>
-        <th>Severity</th>
-        <th>Count</th>
-    </tr>
-
-    {% if threat_counts %}
-
-    {% for item, count in threat_counts.items() %}
-
-    <tr>
-        <td>{{ item[0] }}</td>
-        <td>
-
-        {% if item[1]=="High" %}
-        <span class="high">High</span>
-
-        {% elif item[1]=="Medium" %}
-        <span class="medium">Medium</span>
-
-        {% else %}
-        <span class="low">Low</span>
-
-        {% endif %}
-
-        </td>
-        <td>{{ count }}</td>
-    </tr>
-
-    {% endfor %}
-
-    {% else %}
-
-    <tr>
-        <td colspan="3">No Threat Detected</td>
-    </tr>
-
-    {% endif %}
-
-    </table>
-
-    <hr>
-
-    <h2>MITRE ATT&CK Mapping</h2>
-
-    <table border="1" cellpadding="8">
-
-    <tr>
-        <th>Event</th>
-        <th>MITRE ID</th>
-       <th>Technique</th>
-        <th>Count</th>
-    </tr>
-
-    {% if mitre_counts %}
-
-    {% for item, count in mitre_counts.items() %}
-
-    <tr>
-        <td>{{ item[0] }}</td>
-        <td>{{ item[1] }}</td>
-        <td>{{ item[2] }}</td>
-        <td>{{ count }}</td>
-    </tr>
-
-    {% endfor %}
-
-    {% else %}
-
-    <tr>
-        <td colspan="4">No Mapping Found</td>
-    </tr>
-
-    {% endif %}
-
-    </table>
-
-    <hr>
-
-    <h2>IOC Matches</h2>
-
-    <table border="1" cellpadding="8">
-
-    <tr>
-        <th>IOC</th>
-        <th>Count</th>
-    </tr>
-
-    {% if ioc_counts %}
-
-    {% for ioc, count in ioc_counts.items() %}
-
-    <tr>
-        <td>{{ ioc }}</td>
-        <td>{{ count }}</td>
-    </tr>
-
-    {% endfor %}
-
-    {% else %}
-
-    <tr>
-        <td colspan="2">No IOC Found</td>
-    </tr>
-
-    {% endif %}
-
-    </table>
-
-    <hr>
-
-    <h2>🤖 AI Security Analyst</h2>
-
-    <p style="color:gray;">
-    AI-generated explanation for the detected security event.
-    </p>
-
-    <div class="ai-box">
-
-    {% if ai_explanation %}
-    <pre>{{ ai_explanation }}</pre>
-    {% else %}
-    No AI explanation available.
-    {% endif %}
-
+    <div class="card">
+        <h2>Security Summary</h2>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div>Total Logs</div>
+                <div class="number">{{ total_logs }}</div>
+            </div>
+            <div class="stat-box">
+                <div>Alerts</div>
+                <div class="number">{{ alerts }}</div>
+            </div>
+            <div class="stat-box high">
+                <div>High Severity</div>
+                <div class="number">{{ high }}</div>
+            </div>
+            <div class="stat-box medium">
+                <div>Medium Severity</div>
+                <div class="number">{{ medium }}</div>
+            </div>
+            <div class="stat-box low">
+                <div>Low Severity</div>
+                <div class="number">{{ low }}</div>
+            </div>
+        </div>
     </div>
 
-    <hr>
-
-    <div style="margin-top:20px; text-align:center;">
-
-       <a href="/download_csv">
-            <button class="download-btn" type="button">
-                📥 Download CSV Report
-            </button>
-        </a>
-
+    <div class="card">
+        <h2>Detected Threats</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Severity</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if threats %}
+                    {% for threat in threats %}
+                    <tr>
+                        <td>{{ threat.event }}</td>
+                        <td>{{ threat.severity }}</td>
+                        <td>{{ threat.count }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="3" style="text-align: center; color: #64748b;">No Threat Detected</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
     </div>
-
 
 </body>
-
 </html>

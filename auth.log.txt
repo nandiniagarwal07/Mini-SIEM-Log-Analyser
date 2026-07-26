@@ -1,0 +1,50 @@
+Jun 26 03:42:54 kali systemd-logind[463]: Removed session 2.
+Jun 26 03:42:57 kali systemd-logind[463]: Removed session 3.
+-- Boot d644431550cf44d7b5dcd41b2b03658a --
+Jul 07 11:47:53 kali systemd-logind[475]: New seat seat0.
+Jul 07 11:47:55 kali systemd-logind[475]: Watching system buttons on /dev/input/event2 (Sleep Button)
+Jul 07 11:47:55 kali systemd-logind[475]: Watching system buttons on /dev/input/event1 (Power Button)
+Jul 07 11:47:55 kali systemd-logind[475]: Watching system buttons on /dev/input/event0 (AT Translated Set 2 keyboard)
+Jul 07 11:47:59 kali systemd-logind[475]: New session 'c1' of user 'lightdm' with class 'greeter' and type 'x11'.
+Jul 07 11:47:59 kali systemd-logind[475]: New session '1' of user 'lightdm' with class 'manager-early' and type 'unspecified'.
+Jul 07 11:48:25 kali systemd-logind[475]: Removed session c1.
+Jul 07 11:48:25 kali systemd-logind[475]: New session '2' of user 'kali' with class 'user' and type 'x11'.
+Jul 07 11:48:25 kali systemd-logind[475]: New session '3' of user 'kali' with class 'manager' and type 'unspecified'.
+Jul 07 11:48:35 kali systemd-logind[475]: Removed session 1.
+Jul 07 11:54:35 kali ssh-agent[1108]: exiting on signal 15
+Jul 07 11:54:36 kali systemd-logind[475]: Session 2 logged out. Waiting for processes to exit.
+Jul 07 11:54:39 kali systemd-logind[475]: New session 'c2' of user 'lightdm' with class 'greeter' and type 'x11'.
+Jul 07 11:54:39 kali systemd-logind[475]: New session '4' of user 'lightdm' with class 'manager-early' and type 'unspecified'.
+Jul 07 11:54:54 kali systemd-logind[475]: The system will power off now!
+Jul 07 11:54:54 kali systemd-logind[475]: System is powering down.
+Jul 07 11:54:55 kali systemd-logind[475]: Removed session 2.
+Jul 07 11:54:55 kali systemd-logind[475]: Removed session c2.
+Jul 07 11:54:56 kali systemd-logind[475]: Removed session 4.
+Jul 07 11:54:56 kali systemd-logind[475]: Removed session 3.
+-- Boot 4dbbf443067a4a29aae93204c591417e --
+Jul 11 05:16:21 kali systemd-logind[450]: New seat seat0.
+Jul 11 05:16:22 kali systemd-logind[450]: Watching system buttons on /dev/input/event1 (Power Button)
+Jul 11 05:16:22 kali systemd-logind[450]: Watching system buttons on /dev/input/event2 (Sleep Button)
+Jul 11 05:16:22 kali systemd-logind[450]: Watching system buttons on /dev/input/event0 (AT Translated Set 2 keyboard)
+Jul 11 05:16:27 kali systemd-logind[450]: New session 'c1' of user 'lightdm' with class 'greeter' and type 'x11'.
+Jul 11 05:16:27 kali systemd-logind[450]: New session '1' of user 'lightdm' with class 'manager-early' and type 'unspecified'.
+Jul 11 05:16:37 kali systemd-logind[450]: Removed session c1.
+Jul 11 05:16:37 kali systemd-logind[450]: New session '2' of user 'kali' with class 'user' and type 'x11'.
+Jul 11 05:16:37 kali systemd-logind[450]: New session '3' of user 'kali' with class 'manager' and type 'unspecified'.
+Jul 11 05:16:48 kali systemd-logind[450]: Removed session 1.
+Jul 11 05:32:25 kali systemd-logind[450]: The system will power off now!
+Jul 11 05:32:25 kali systemd-logind[450]: System is powering down.
+Jul 11 05:32:25 kali ssh-agent[1110]: exiting on signal 15
+Jul 11 05:32:26 kali systemd-logind[450]: Removed session 2.
+Jul 11 05:32:26 kali systemd-logind[450]: Removed session 3.
+-- Boot dc4a733abf744d788ed7cd1163f58ed4 --
+Jul 18 10:20:41 kali systemd-logind[441]: New seat seat0.
+Jul 18 10:20:42 kali systemd-logind[441]: Watching system buttons on /dev/input/event1 (Power Button)
+Jul 18 10:20:42 kali systemd-logind[441]: Watching system buttons on /dev/input/event2 (Sleep Button)
+Jul 18 10:20:42 kali systemd-logind[441]: Watching system buttons on /dev/input/event0 (AT Translated Set 2 keyboard)
+Jul 18 10:20:47 kali systemd-logind[441]: New session 'c1' of user 'lightdm' with class 'greeter' and type 'x11'.
+Jul 18 10:20:47 kali systemd-logind[441]: New session '1' of user 'lightdm' with class 'manager-early' and type 'unspecified'.
+Jul 18 10:22:07 kali systemd-logind[441]: Removed session c1.
+Jul 18 10:22:07 kali systemd-logind[441]: New session '2' of user 'kali' with class 'user' and type 'x11'.
+Jul 18 10:22:07 kali systemd-logind[441]: New session '3' of user 'kali' with class 'manager' and type 'unspecified'.
+Jul 18 10:22:18 kali systemd-logind[441]: Removed session 1.

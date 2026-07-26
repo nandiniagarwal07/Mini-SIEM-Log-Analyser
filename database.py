@@ -1,6 +1,6 @@
 import sqlite3
 
-DATABASE = "database/siem.db"
+DATABASE = "siem.db"
 
 
 def create_database():
